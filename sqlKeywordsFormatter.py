@@ -11,7 +11,7 @@ def format_keywords(file: str):
 
     # List of SQL Keywords
     keywords = ['add', 'constraint', 'alter', 'alter', 'all', 'and', 'any', 'as', 'asc', 'backup',
-                'between', 'by', 'case', 'check', 'column', 'constraint', 'create', 'database', 'default',
+                'between', 'by', 'case', 'check', 'column', 'constraint', 'count', 'create', 'database', 'default',
                 'delete', 'desc', 'distinct', 'drop', 'exec', 'exists', 'foreign', 'from',
                 'full', 'group by', 'having', 'in', 'index', 'inner', 'insert into',
                 'is null', 'is not null', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'or',
