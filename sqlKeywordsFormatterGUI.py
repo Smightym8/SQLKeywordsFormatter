@@ -7,7 +7,7 @@ from tkinter import filedialog as fd
 # All other words will be changed to lowercase
 def format_keywords(file: str):
     if not file.endswith('.sql'):
-        messages_label.configure(text = "This file is not a sql file.")
+        print("This file is not a sql file.")
         sys.exit(-1)
 
     # List of SQL Keywords
@@ -44,7 +44,7 @@ def format_keywords(file: str):
 
                 lines.append(line)
     except OSError:
-        messages_label.configure(text = "ERROR: Could not open/read file")
+        print("ERROR: Could not open/read file")
         sys.exit(-1)
 
     # Close file explicitly
@@ -55,17 +55,17 @@ def format_keywords(file: str):
             for line in lines:
                 output_file.write(line)
     except OSError:
-        messages_label.configure(text = "ERROR: Could not open/read file")
+        print("ERROR: Could not open/read file")
         sys.exit(-1)
 
     # Close file explicitly
     output_file.close()
 
-    messages_label.configure(text = "Formatted " + file + " successfully.")
+    print("Formatted " + str(file) + " successfully.")
 
 def choose_file():
     filename = fd.askopenfilename(filetypes=[('SQL File', '*.sql')])
-    chosen_file_label.configure(text = "Chosen file:\n" + filename)
+    chosen_file.configure(text = "Chosen file:\n" + filename)
 
     return filename
 
@@ -81,13 +81,13 @@ if __name__ == "__main__":
     choose_file_button = tk.Button(text='Choose file', command = lambda: file == choose_file())
     choose_file_button.pack(pady=10)
 
-    chosen_file_label = tk.Label(text = "Chosen file:")
-    chosen_file_label.pack(pady=10)
+    chosen_file = tk.Label(text = "Chosen file:")
+    chosen_file.pack(pady=10)
 
     format_file_button = tk.Button(text='Format file')
     format_file_button.pack(pady=10)
 
     messages_label = tk.Label(text = '')
-    messages_label.pack(pady=10)
+    chosen_file.pack(pady=10)
 
     window.mainloop()
