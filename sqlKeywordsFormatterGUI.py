@@ -1,5 +1,4 @@
 import re
-import sys
 import tkinter as tk
 from tkinter import filedialog as fd 
 
@@ -30,19 +29,20 @@ class SqlKeywordsFormatterApp(tk.Tk):
         self.chosen_file.configure(text = "Chosen file:\n" + self.filename)
 
     def format_keywords(self):
-        if not self.filename.endswith('.sql'):
-            self.messages_label.configure(text = "This file is not a sql file.")
+        if self.filename == '':
+            self.messages_label.configure(text = "You have to choose a file.")
             return
+        
 
         # List of SQL Keywords
-        keywords = ['add', 'constraint', 'alter', 'alter', 'all', 'and', 'any', 'as', 'asc', 'backup',
-                    'between', 'by', 'case', 'check', 'column', 'constraint', 'count', 'create', 'database', 'default',
-                    'delete', 'desc', 'distinct', 'drop', 'exec', 'exists', 'foreign', 'from',
-                    'full', 'group by', 'having', 'in', 'index', 'inner', 'insert into',
-                    'is null', 'is not null', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'or',
-                    'order', 'outer', 'primary', 'procedure', 'right', 'rownum', 'select',
-                    'set', 'table', 'top', 'truncate', 'union', 'unique', 'update', 'values', 'view', 'where'
-                    ]
+        keywords = ['add', 'constraint', 'alter', 'all', 'and', 'any', 'as', 'asc', 'avg', 'backup',
+                'between', 'by', 'case', 'check', 'column', 'constraint', 'count', 'create', 'database', 'default',
+                'delete', 'desc', 'distinct', 'drop', 'exec', 'exists', 'foreign', 'from',
+                'full', 'group', 'having', 'in', 'index', 'inner', 'insert', 'into',
+                'is', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'or',
+                'order', 'outer', 'primary', 'procedure', 'right', 'rownum', 'select',
+                'set', 'table', 'top', 'truncate', 'union', 'unique', 'update', 'values', 'view', 'where'
+                ]
 
         # List to save the edited lines
         lines = []

@@ -1,20 +1,24 @@
 import re
 import sys
+import argparse
 
 
 # Takes a file as argument and changes all keywords to uppercase
 # All other words will be changed to lowercase
-def format_keywords(file: str):
-    if not file.endswith('.sql'):
-        print("This file is not a sql file.")
+def format_keywords(infile: str, outfile: str):
+    if not infile.endswith('.sql'):
+        print("The input file is not a sql file.")
+        sys.exit(-1)
+    elif not outfile.endswith('.sql'):
+        print("The output file should also be a sql file.")
         sys.exit(-1)
 
     # List of SQL Keywords
-    keywords = ['add', 'constraint', 'alter', 'alter', 'all', 'and', 'any', 'as', 'asc', 'backup',
+    keywords = ['add', 'constraint', 'alter', 'all', 'and', 'any', 'as', 'asc', 'avg', 'backup',
                 'between', 'by', 'case', 'check', 'column', 'constraint', 'count', 'create', 'database', 'default',
                 'delete', 'desc', 'distinct', 'drop', 'exec', 'exists', 'foreign', 'from',
-                'full', 'group by', 'having', 'in', 'index', 'inner', 'insert into',
-                'is null', 'is not null', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'or',
+                'full', 'group', 'having', 'in', 'index', 'inner', 'insert', 'into',
+                'is', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'or',
                 'order', 'outer', 'primary', 'procedure', 'right', 'rownum', 'select',
                 'set', 'table', 'top', 'truncate', 'union', 'unique', 'update', 'values', 'view', 'where'
                 ]
@@ -24,7 +28,7 @@ def format_keywords(file: str):
 
     try:
         # Read from file and save lines in list
-        with open(file, 'r') as input_file:
+        with open(infile, 'r') as input_file:
             is_multiline_comment = False
 
             for line in input_file:
@@ -50,7 +54,7 @@ def format_keywords(file: str):
     input_file.close()
 
     try:
-        with open(file, 'w') as output_file:
+        with open(outfile, 'w+') as output_file:
             for line in lines:
                 output_file.write(line)
     except OSError:
@@ -60,19 +64,23 @@ def format_keywords(file: str):
     # Close file explicitly
     output_file.close()
 
-    print("Formatted " + str(file) + " successfully.")
+    print('Formatted ' + infile + ' successfully to ' + outfile)
 
 
-def usage():
-    print("usage: python3 sqlKeywordsFormatter [Path to SQL File]")
-
-
-def main(argv):
-    if len(argv) != 1:
-        usage()
+def main(args):
+    # Check if output file was specified
+    if args.o == None:
+        format_keywords(args.File, args.File)
     else:
-        format_keywords(argv[0])
+        format_keywords(args.File, args.o)
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
+    # Use argument parser to provide arguments
+    parser = argparse.ArgumentParser(description='Format Keywords in SQL Files')
+    parser.add_argument('File', metavar='F', type=str, help='The file which should be formatted')
+    parser.add_argument('-o', help='Specifiy output file for formatted SQL File. If not used the input file will be the output file.')
+    args = parser.parse_args()
+
+    main(args)
+    
