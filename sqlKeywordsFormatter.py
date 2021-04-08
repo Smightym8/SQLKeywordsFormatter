@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import re
 import sys
 import argparse
@@ -18,7 +20,7 @@ def format_keywords(infile: str, outfile: str):
                 'between', 'by', 'case', 'check', 'column', 'constraint', 'count', 'create', 'database', 'default',
                 'delete', 'desc', 'distinct', 'drop', 'exec', 'exists', 'foreign', 'from',
                 'full', 'group', 'having', 'in', 'index', 'inner', 'insert', 'into',
-                'is', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'or',
+                'is', 'join', 'key', 'left', 'like', 'limit', 'not', 'null', 'on', 'or',
                 'order', 'outer', 'primary', 'procedure', 'right', 'rownum', 'select',
                 'set', 'table', 'top', 'truncate', 'union', 'unique', 'update', 'values', 'view', 'where'
                 ]
