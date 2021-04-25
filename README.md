@@ -1,6 +1,6 @@
 # SQLKeywordsFormatter
 <p> 
-A commandline tool written in Python3 to format SQL Keywords to uppercase and other words to lowercase. This tool is for all who do not want to write keywords in uppercase themselves and prefer to simply write everything in small latters.
+A commandline tool written in Python3 to format SQL Keywords to uppercase and other words to lowercase. This tool is for all who do not want to write keywords in uppercase themselves and prefer to simply write everything in small letters.
 </p>
 
     usage: sqlKeywordsFormatter.py [-h] [-o O] F
